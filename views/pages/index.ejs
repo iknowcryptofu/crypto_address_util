@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head'); %>
+</head>
+<body class="container">
+
+    <header>
+        <%- include('../partials/header'); %>
+    </header>
+    <addressForm>
+        <%- include('../partials/form'); %>
+    </addressForm>
+    <main>
+        <div class="jumbotron">
+            <h1>Top Mascots</h1>
+            <p><%= cryptoAddress %></p>
+            <p><%= currencyNamesMatch %></p>
+            <ul>
+                <% mascots.forEach(function(mascot) { %>
+                    <li>
+                        <strong><%= mascot.name %></strong>
+                        Chain: <%= mascot.name %>
+                    </li>
+                <% }); %>
+            </ul>
+        </div>
+    </main>
+
+    <footer>
+        <%- include('../partials/footer'); %>
+    </footer>
+
+</body>
+</html>
