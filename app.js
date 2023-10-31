@@ -10,6 +10,10 @@ app.set('view engine', 'ejs');
 
 app.use(express.json());       
 app.use(express.urlencoded({extended: true})); 
+app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
+app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js'));
+
+app.use('/js', express.static(__dirname + '/views/js'));
 
 var valid = WAValidator.validate('1KFzzGtDdnq5hrwxXGjwVnKzRbvf8WVxck', 'BTC');
 if(valid)
@@ -51,13 +55,13 @@ app.post("/", (req, res) => {
     cryptoAddress = req.body.cryptoAddress;
     //currencyNamesMatch = showMatchedCurr(cryptoAddress);
     const password = req.body.password;
-    console.log("Username: " + cryptoAddress);
+    console.log("Crypto Address: " + cryptoAddress);
     //console.log("Password: " + password);
     //res.send("Data received");
     //to stay on same page
     //res.status(204).send();
     res.redirect('/');
-    //res.redirect('/').render('/',{cryptoAddress});
+    //res.redirect('/').render('/',{cryptoAddress:req.body.cryptoAddress});
     //res.render('pages/index', {cryptoAddress: "xyz"});
   });
 // index page 
@@ -81,10 +85,10 @@ app.get('/', function(req, res) {
     });
 });
 
-/*app.get("/", (req, res) => {
-    res.sendFile(__dirname + "/index.html");
+app.get("/indexcover3.html", (req, res) => {
+    res.sendFile(__dirname + "/views/pages/indexcover3.html");
   });
-   */
+
 //post function here
 
   
