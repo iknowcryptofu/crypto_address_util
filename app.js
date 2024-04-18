@@ -1,5 +1,8 @@
 // load the things we need
 var WAValidator = require('../trezor-address-validator');
+var { testMatched } = require('./testMatched');
+var matchedAddress = require('./testMatched');
+var anotherTest = require('./testSimpleFn')
 var express = require('express');
 var app = express();
 
@@ -22,13 +25,24 @@ else
 	console.log('Address INVALID');
 
 
+
 // This will log 'This is a valid address' to the console.
+// if(validTest)
+// 	console.log('This is a very valid address');
+// else
+// 	console.log('Address INVALID');
 
 const btc_address = '1KFzzGtDdnq5hrwxXGjwVnKzRbvf8WVxck';
 const ada_address = 'addr1wysmmrpwphe0h6fpxlmcmw46frmzxz89yvpsf8cdv29kcnqsw3vw6';
 const eth_address = '0x42AE0B92E4985AD0Cde45e9c1Aa72e7f5A130B9E';
 
+const names = require('./testSimpleFn'); // require() returns the object assigned to module.exports
 
+console.log(names.firstnameLastname()); // will print "Jane Doe"
+console.log(names.lastnameFirstname()); // will print "Doe, Jane"
+console.log(names.matched());
+console.log(matchedAddress.getAddress(eth_address));
+console.log(matchedAddress.showMatchedCurr3(eth_address));
 function showMatchedCurr(address) {
     
     var allCurrencies = WAValidator.getCurrencies();
@@ -47,6 +61,8 @@ function showMatchedCurr(address) {
 
 }
 
+//console.log(anotherTest(eth_address));
+//console.log(anotherTest);
 //console.log(WAValidator.sayhi());
 
 // use res.render to load up an ejs view file
@@ -66,8 +82,8 @@ app.post("/", (req, res) => {
 
 // index page 
 app.get('/', function(req, res) {
-    
-    currencyNamesMatch = showMatchedCurr(cryptoAddress);
+    currencyNamesMatch = matchedAddress.showMatchedCurr3(cryptoAddress)
+    //currencyNamesMatch = showMatchedCurr(cryptoAddress);
 
     res.render('pages/index', {
         cryptoAddress: cryptoAddress,
@@ -91,3 +107,5 @@ app.get('/about', function(req, res) {
 
 app.listen(8080);
 console.log('8080 is the magic port');
+
+module.exports = { showMatchedCurr }
