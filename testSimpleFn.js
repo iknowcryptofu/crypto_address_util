@@ -1,9 +1,6 @@
-
-function matched() {
-  return "grr";   
-}
-
-
+var WAValidator = require('../trezor-address-validator');
+//var nativeTokens = WAValidator.nativeTokensSymbols;
+//console.log(nativeTokens);
 // names.js module
 function lastname() { // private function
   return "Doe";
@@ -21,5 +18,15 @@ function lastnameFirstname() { // public function
   return `${lastname()}, ${firstname()}`;
 }
 
-module.exports = { firstnameLastname, lastnameFirstname, matched }; // object to be returned by require()
+var nativeTokens = [
+  'btc',   'bch',  'nxt',  'xrp',
+  'eth',   'ada',  'xmr',  'ardr',
+  'steem', 'sys',  'atom', 'ae',
+  'icx',   'IOST', 'nano', 'sc',
+  'loki',  'trx',  'xem',  'lsk',
+  'xlm',   'sol',  'bnb',  'eos',
+  'xtz',   'hbar', 'zil'
+]
+
+module.exports = { firstnameLastname, lastnameFirstname }; // object to be returned by require()
 

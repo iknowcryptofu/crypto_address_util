@@ -1,8 +1,6 @@
 // load the things we need
 var WAValidator = require('../trezor-address-validator');
-var { testMatched } = require('./testMatched');
-var matchedAddress = require('./testMatched');
-var anotherTest = require('./testSimpleFn')
+var matchedAddress = require('./matchedCurr');
 var express = require('express');
 var app = express();
 
@@ -24,14 +22,6 @@ if(valid)
 else
 	console.log('Address INVALID');
 
-
-
-// This will log 'This is a valid address' to the console.
-// if(validTest)
-// 	console.log('This is a very valid address');
-// else
-// 	console.log('Address INVALID');
-
 const btc_address = '1KFzzGtDdnq5hrwxXGjwVnKzRbvf8WVxck';
 const ada_address = 'addr1wysmmrpwphe0h6fpxlmcmw46frmzxz89yvpsf8cdv29kcnqsw3vw6';
 const eth_address = '0x42AE0B92E4985AD0Cde45e9c1Aa72e7f5A130B9E';
@@ -40,30 +30,6 @@ const names = require('./testSimpleFn'); // require() returns the object assigne
 
 console.log(names.firstnameLastname()); // will print "Jane Doe"
 console.log(names.lastnameFirstname()); // will print "Doe, Jane"
-console.log(names.matched());
-console.log(matchedAddress.getAddress(eth_address));
-console.log(matchedAddress.showMatchedCurr3(eth_address));
-function showMatchedCurr(address) {
-    
-    var allCurrencies = WAValidator.getCurrencies();
-
-    function checkCurrencies(currency) {
-        var valid =  WAValidator.validate(address, currency.symbol);
-        if (valid)
-            return currency;
-    };
-
-    var currenciesMatch = allCurrencies.filter(checkCurrencies);
-    var currencyNamesMatch = currenciesMatch.map(token => token.name);
-    console.log(currencyNamesMatch);
-
-    return currencyNamesMatch;
-
-}
-
-//console.log(anotherTest(eth_address));
-//console.log(anotherTest);
-//console.log(WAValidator.sayhi());
 
 // use res.render to load up an ejs view file
 var cryptoAddress = "abc";
@@ -82,9 +48,8 @@ app.post("/", (req, res) => {
 
 // index page 
 app.get('/', function(req, res) {
-    currencyNamesMatch = matchedAddress.showMatchedCurr3(cryptoAddress)
-    //currencyNamesMatch = showMatchedCurr(cryptoAddress);
-
+    var currencyNamesMatch = matchedAddress.showMatchedCurr(cryptoAddress)
+    
     res.render('pages/index', {
         cryptoAddress: cryptoAddress,
         currencyNamesMatch: currencyNamesMatch
@@ -95,10 +60,6 @@ app.get("/indexcover3.html", (req, res) => {
     res.sendFile(__dirname + "/views/pages/indexcover3.html");
   });
 
-//post function here
-
-  
-
 // about page
 app.get('/about', function(req, res) {
     res.render('pages/about');
@@ -107,5 +68,3 @@ app.get('/about', function(req, res) {
 
 app.listen(8080);
 console.log('8080 is the magic port');
-
-module.exports = { showMatchedCurr }
