@@ -3,6 +3,7 @@ var WAValidator = require('../trezor-address-validator');
 var matchedAddress = require('./matchedCurr');
 var express = require('express');
 var app = express();
+const PORT = process.env.PORT || 8080;
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
@@ -66,5 +67,6 @@ app.get('/about', function(req, res) {
 });
 
 
-app.listen(8080);
-console.log('8080 is the magic port');
+app.listen(PORT, () => {
+  console.log(`Server started on port ${PORT}`);
+});
