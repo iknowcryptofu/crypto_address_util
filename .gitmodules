@@ -1,0 +1,3 @@
+[submodule "trezor-address-validator"]
+	path = trezor-address-validator
+	url = https://github.com/iknowcryptofu/trezor-address-validator.git
