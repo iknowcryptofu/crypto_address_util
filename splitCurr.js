@@ -1,6 +1,6 @@
 //split allCurrencies object of list of crypto currencies according to eth
-var WAValidator = require('../trezor-address-validator');
-var ETHValidator = require('../trezor-address-validator/src/ethereum_validator');
+var WAValidator = require('./trezor-address-validator');
+var ETHValidator = require('./trezor-address-validator/src/ethereum_validator');
 var fs = require('fs');
 var allCurrencies = WAValidator.getCurrencies();
 var excludeEth = allCurrencies.filter(checkForEth);
