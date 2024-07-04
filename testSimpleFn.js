@@ -1,4 +1,4 @@
-var WAValidator = require('./trezor-address-validator');
+var WAValidator = require('../trezor-address-validator');
 //var nativeTokens = WAValidator.nativeTokensSymbols;
 //console.log(nativeTokens);
 // names.js module

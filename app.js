@@ -1,5 +1,5 @@
 // load the things we need
-var WAValidator = require('./trezor-address-validator');
+var WAValidator = require('../trezor-address-validator');
 var matchedAddress = require('./matchedCurr');
 var express = require('express');
 var app = express();

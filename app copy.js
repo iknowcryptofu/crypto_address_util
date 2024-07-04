@@ -1,4 +1,4 @@
-var WAValidator = require('./trezor-address-validator');
+var WAValidator = require('../trezor-address-validator');
 
 var valid = WAValidator.validate('1KFzzGtDdnq5hrwxXGjwVnKzRbvf8WVxck', 'BTC');
 if(valid)
