@@ -1,4 +1,4 @@
-var WAValidator = require('../trezor-address-validator');
+var WAValidator = require('trezor-address-validator');
 
 function showMatchedCurr(address) {
     
