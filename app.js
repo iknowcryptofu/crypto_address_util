@@ -66,6 +66,10 @@ app.get('/about', function(req, res) {
     res.render('pages/about');
 });
 
+app.use('/api/:address', function(req, res){
+    res.send(req.params.address);
+})
+
 
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
