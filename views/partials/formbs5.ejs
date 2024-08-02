@@ -16,7 +16,7 @@
           </button>
         </span>
         
-        <input type="text" class="form-control" name="cryptoAddress" id="clipboardInput" placeholder="Paste Crytpo Address Here" pattern="^[a-zA-Z0-9]+\.{0,3}-?" minlength="3" maxlength="100" required>
+        <input type="search" class="form-control" name="cryptoAddress" id="clipboardInput" placeholder="Paste Crytpo Address Here" pattern="^[a-zA-Z0-9]+\.{0,3}-?" minlength="3" maxlength="100" required>
        
         <span class="input-group-text input-group-sm">
           <button class="btn btn-outline-secondary" type="submit">
@@ -41,11 +41,9 @@
       <h4>Results:</h4>
     </div>
     <div class="d-flex flex-column mb-3">
-      <% currencyNamesMatch.forEach(element =>{ %>
-        <div class="p-2"><%=element %></div>
-      <% }); %>
+     
     </div>
-    <div class="p-2"> <%= currencyNamesMatch %></div>
+    <div class="p-2"> <%- currencyNamesMatch %></div>
         
     
 

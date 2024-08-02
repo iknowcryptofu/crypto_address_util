@@ -28,5 +28,10 @@ var nativeTokens = [
   'xtz',   'hbar', 'zil'
 ]
 
+//from formbs5.ejs it was messing up my code and giving error
+// <% currencyNamesMatch.forEach(element =>{ %>
+//   <div class="p-2"><%=element %></div>
+// <% }); %> 
+
 module.exports = { firstnameLastname, lastnameFirstname }; // object to be returned by require()
 

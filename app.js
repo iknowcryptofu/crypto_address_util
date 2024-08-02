@@ -38,7 +38,8 @@ app.post("/", (req, res) => {
     
     cryptoAddress = req.body.cryptoAddress;
     console.log("Crypto Address: " + cryptoAddress);
-    console.log(WAValidator.sayhi());
+    //where the fuck does sayhi() come from?!
+    //console.log(WAValidator.sayhi());
     //res.send("Data received");
     //to stay on same page
     //res.status(204).send();
@@ -50,10 +51,12 @@ app.post("/", (req, res) => {
 // index page 
 app.get('/', function(req, res) {
     var currencyNamesMatch = matchedAddress.showMatchedCurr(cryptoAddress)
-    
+    console.log("Return Messsage: " + currencyNamesMatch)
     res.render('pages/index', {
         cryptoAddress: cryptoAddress,
         currencyNamesMatch: currencyNamesMatch
+        //currencyNamesMatch: "Bitcoin,Bitcoin Diamond,Bitcoin SV,FreiCoin,Tether,Tezos."
+        
         });
 });
 
