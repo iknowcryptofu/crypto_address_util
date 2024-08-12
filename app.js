@@ -33,30 +33,29 @@ console.log(names.firstnameLastname()); // will print "Jane Doe"
 console.log(names.lastnameFirstname()); // will print "Doe, Jane"
 
 // use res.render to load up an ejs view file
-var cryptoAddress = "abc";
+var cryptoAddress2 = "abc";
 app.post("/", (req, res) => {
     
-    cryptoAddress = req.body.cryptoAddress;
-    console.log("Crypto Address: " + cryptoAddress);
+    cryptoAddress2 = req.body.cryptoAddress;
+    console.log("Crypto Address: " + cryptoAddress2);
     //where the fuck does sayhi() come from?!
     //console.log(WAValidator.sayhi());
     //res.send("Data received");
     //to stay on same page
     //res.status(204).send();
-    res.redirect('/');
-    //res.redirect('/').render('/',{cryptoAddress:req.body.cryptoAddress});
+    //res.redirect('/');
+    res.redirect('/');//.render('/',{cryptoAddress:req.body.cryptoAddress});
     //res.render('pages/index', {cryptoAddress: "xyz"});
   });
 
 // index page 
 app.get('/', function(req, res) {
-    var currencyNamesMatch = matchedAddress.showMatchedCurr(cryptoAddress)
+    var currencyNamesMatch = matchedAddress.showMatchedCurr(cryptoAddress2)
     console.log("Return Messsage: " + currencyNamesMatch)
     res.render('pages/index', {
-        cryptoAddress: cryptoAddress,
+        cryptoAddress: cryptoAddress2,
         currencyNamesMatch: currencyNamesMatch
-        //currencyNamesMatch: "Bitcoin,Bitcoin Diamond,Bitcoin SV,FreiCoin,Tether,Tezos."
-        
+             
         });
 });
 
