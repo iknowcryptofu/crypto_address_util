@@ -33,12 +33,12 @@ console.log(names.firstnameLastname()); // will print "Jane Doe"
 console.log(names.lastnameFirstname()); // will print "Doe, Jane"
 
 // use res.render to load up an ejs view file
-var cryptoAddress2 = "abc";
+var cryptoAddress2 = "";
 app.post("/", (req, res) => {
     
     cryptoAddress2 = req.body.cryptoAddress;
     console.log("Crypto Address: " + cryptoAddress2);
-    //where the fuck does sayhi() come from?!
+    //where the f*ck does sayhi() come from?!
     //console.log(WAValidator.sayhi());
     //res.send("Data received");
     //to stay on same page
@@ -50,11 +50,11 @@ app.post("/", (req, res) => {
 
 // index page 
 app.get('/', function(req, res) {
-    var currencyNamesMatch = matchedAddress.showMatchedCurr(cryptoAddress2)
-    console.log("Return Messsage: " + currencyNamesMatch)
+    var currencyNamesMatchMsg = matchedAddress.showMatchedCurr(cryptoAddress2)
+    console.log("Return Messsage: " + currencyNamesMatchMsg)
     res.render('pages/index', {
         cryptoAddress: cryptoAddress2,
-        currencyNamesMatch: currencyNamesMatch
+        currencyNamesMatch: currencyNamesMatchMsg
              
         });
 });
