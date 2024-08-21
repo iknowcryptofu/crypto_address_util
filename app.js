@@ -31,32 +31,33 @@ const names = require('./testSimpleFn'); // require() returns the object assigne
 
 console.log(names.firstnameLastname()); // will print "Jane Doe"
 console.log(names.lastnameFirstname()); // will print "Doe, Jane"
-
+//19aug2024 the problem is that something is blocking the refresh of the index webpage. everytime i refresh the main index page
+//is that Return Message code is being called. it looks like that it's not the locals in formbs5.ejs. i removed both but the index
+//page still outputs data on refresh.
 // use res.render to load up an ejs view file
-var cryptoAddress2 = "";
+//21aug2024 solved it. it was the currencyNamesMatchMsg variable.  watched youtube video about to-do list that showed an example.
+let cryptoAddress2 = "";
+let currencyNamesMatchMsg = "";
 app.post("/", (req, res) => {
-    
     cryptoAddress2 = req.body.cryptoAddress;
     console.log("Crypto Address: " + cryptoAddress2);
     //where the f*ck does sayhi() come from?!
     //console.log(WAValidator.sayhi());
+    currencyNamesMatchMsg = matchedAddress.showMatchedCurr(cryptoAddress2);
     //res.send("Data received");
     //to stay on same page
     //res.status(204).send();
-    //res.redirect('/');
-    res.redirect('/');//.render('/',{cryptoAddress:req.body.cryptoAddress});
-    //res.render('pages/index', {cryptoAddress: "xyz"});
+    res.redirect('/');
+   
   });
 
 // index page 
 app.get('/', function(req, res) {
-    var currencyNamesMatchMsg = matchedAddress.showMatchedCurr(cryptoAddress2)
-    console.log("Return Messsage: " + currencyNamesMatchMsg)
     res.render('pages/index', {
         cryptoAddress: cryptoAddress2,
         currencyNamesMatch: currencyNamesMatchMsg
-             
         });
+    console.log("Return Messsage: " + currencyNamesMatchMsg)
 });
 
 app.get("/indexcover3.html", (req, res) => {
