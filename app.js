@@ -64,9 +64,14 @@ app.get("/indexcover3.html", (req, res) => {
     res.sendFile(__dirname + "/views/pages/indexcover3.html");
   });
 
-// about page
-app.get('/about', function(req, res) {
-    res.render('pages/about');
+// chains page
+app.get('/chains', function(req, res) {
+    res.render('pages/chains');
+});
+
+// help page
+app.get('/help', function(req, res) {
+  res.render('pages/help');
 });
 
 app.use('/api/:address', function(req, res){
