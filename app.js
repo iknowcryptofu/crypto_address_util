@@ -60,10 +60,6 @@ app.get('/', function(req, res) {
     console.log("Return Messsage: " + currencyNamesMatchMsg)
 });
 
-app.get("/indexcover3.html", (req, res) => {
-    res.sendFile(__dirname + "/views/pages/indexcover3.html");
-  });
-
 // chains page
 app.get('/chains', function(req, res) {
     res.render('pages/chains');
