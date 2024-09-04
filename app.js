@@ -65,6 +65,12 @@ app.get('/chains', function(req, res) {
     res.render('pages/chains');
 });
 
+// chains2 test page
+app.get('/chains2', function(req, res) {
+  res.render('pages/chains2');
+});
+
+
 // help page
 app.get('/help', function(req, res) {
   res.render('pages/help');
