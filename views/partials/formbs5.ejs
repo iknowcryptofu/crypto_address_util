@@ -35,7 +35,7 @@
       </form>
       
   </div>
-  <div class="container w-100 h-50">
+  <div class="container w-100 h-50 border">
     
     <div class="container">
       <h4>Results:</h4>
@@ -44,9 +44,9 @@
      
     </div>
     <div class="p-2"> <%- currencyNamesMatch ? currencyNamesMatch : "Please enter info" %></div>
-        
+    <!-- <div class="p-2"> <%- currencyNamesMatch || "Please enter a cryptocurrency address in the input form field above." %></div>   -->
     
-
+    <div class="p-2" id="msgTest"> <%- currencyNamesMatch ? currencyNamesMatch : "Please enter info" %></div>
   </div>
  
 </main>
@@ -74,6 +74,7 @@
   // Add an event listener for form submission
   document.getElementById("satsForm").addEventListener("submit", function(event) {
     const feedbackDiv = document.getElementById("msg");
+    const feedbackDivTest = document.getElementById("msgTest");
     const inputField = document.getElementById('clipboardInput');
     // Check if the form is valid
       if (!this.checkValidity()) {
@@ -91,10 +92,14 @@
             }
             if (inputField.validity.tooLong) {
                 errorMessage += '<li>Input is too long.</li>';
+            } 
+            if (inputField.validity.valueMissing) {
+                errorMessage += '<li>Input is Missing.</li>';
             }
             errorMessage += '</ul></div>';
             this.classList.add('is-invalid');
             feedbackDiv.innerHTML = errorMessage;
+            feedbackDivTest.innerHTML = errorMessage;
           }
       }
       this.classList.add('was-validated')
