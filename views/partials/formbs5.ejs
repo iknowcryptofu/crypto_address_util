@@ -24,15 +24,9 @@
               <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
             </svg>
           </button>
-        </span>
-       
-        <div class="invalid-feedback border" id="msg" >
-          
-        </div>
-     
+        </span>         
       </div>
-     
-      </form>
+    </form>
       
   </div>
   <div class="container w-100 h-50 border">
@@ -43,10 +37,10 @@
     <div class="d-flex flex-column mb-3">
      
     </div>
-    <div class="p-2"> <%- currencyNamesMatch ? currencyNamesMatch : "Please enter info" %></div>
+    <!-- <div class="p-2"> <%- currencyNamesMatch ? currencyNamesMatch : "Please enter info" %></div> -->
     <!-- <div class="p-2"> <%- currencyNamesMatch || "Please enter a cryptocurrency address in the input form field above." %></div>   -->
     
-    <div class="p-2" id="msgTest"> <%- currencyNamesMatch ? currencyNamesMatch : "Please enter info" %></div>
+    <div class="p-2" id="msgTest"> <%- currencyNamesMatch || "Please enter a cryptocurrency address in the input form field above." %></div>
   </div>
  
 </main>
@@ -82,7 +76,7 @@
           event.stopPropagation();
           //alert(feedbackDiv);
           if (!inputField.validity.valid) {
-            let errorMessage = '<div class="mx-auto w-25"><ul>';
+            let errorMessage = '<div class="mx-auto w-100"><ul>';
               
               if (inputField.validity.patternMismatch) {
             errorMessage += '<li>Please use only the following characters:Letter,number,dot or hyphen.</li>';
@@ -98,7 +92,7 @@
             }
             errorMessage += '</ul></div>';
             this.classList.add('is-invalid');
-            feedbackDiv.innerHTML = errorMessage;
+            //feedbackDiv.innerHTML = errorMessage;
             feedbackDivTest.innerHTML = errorMessage;
           }
       }
