@@ -2,6 +2,7 @@
 var WAValidator = require('trezor-address-validator');
 var matchedAddress = require('./matchedCurr');
 var express = require('express');
+const session = require('express-session');
 var app = express();
 const PORT = process.env.PORT || 8080;
 
@@ -16,6 +17,12 @@ app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js'));
 
 app.use('/js', express.static(__dirname + '/views/js'));
+app.use(session({
+  name: 'session',
+  keys: ['key1'],
+  secret: ['secret']
+
+}));
 
 var valid = WAValidator.validate('1KFzzGtDdnq5hrwxXGjwVnKzRbvf8WVxck', 'BTC');
 if(valid)
