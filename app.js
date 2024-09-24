@@ -18,9 +18,8 @@ app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js'));
 
 app.use('/js', express.static(__dirname + '/views/js'));
 app.use(session({
-  name: 'session',
-  keys: ['key1'],
-  secret: ['secret']
+  secret: 'a secret',
+  cookie: {}
 
 }));
 
