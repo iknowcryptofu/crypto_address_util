@@ -19,7 +19,7 @@ app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js'));
 app.use('/js', express.static(__dirname + '/views/js'));
 app.use(session({
   secret: 'a secret',
-  cookie: {}
+  cookie: { secure: false }
 
 }));
 
@@ -45,25 +45,32 @@ console.log(names.lastnameFirstname()); // will print "Doe, Jane"
 let cryptoAddress2 = "";
 let currencyNamesMatchMsg = "";
 app.post("/", (req, res) => {
+    
     cryptoAddress2 = req.body.cryptoAddress;
     console.log("Crypto Address: " + cryptoAddress2);
+    req.session.cryptoAddress3 = cryptoAddress2;
     //where the f*ck does sayhi() come from?!
     //console.log(WAValidator.sayhi());
     currencyNamesMatchMsg = matchedAddress.showMatchedCurr(cryptoAddress2);
+    req.session.currencyNamesMatchMsg2 = currencyNamesMatchMsg;
     //res.send("Data received");
     //to stay on same page
     //res.status(204).send();
     res.redirect('/');
+    //req.session.destroy();
    
   });
 
 // index page 
 app.get('/', function(req, res) {
+  const sessionData = req.session;
     res.render('pages/index', {
-        cryptoAddress: cryptoAddress2,
-        currencyNamesMatch: currencyNamesMatchMsg
+        cryptoAddress: sessionData.cryptoAddress3,
+        currencyNamesMatch: sessionData.currencyNamesMatchMsg2
         });
     console.log("Return Messsage: " + currencyNamesMatchMsg)
+    console.log("Session Data: " + sessionData)
+    req.session.destroy();
 });
 
 // chains page
