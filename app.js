@@ -5,6 +5,7 @@ var express = require('express');
 const session = require('express-session');
 var app = express();
 const PORT = process.env.PORT || 8080;
+//const Base58 =  require('trezor-address-validator/src/crypto/base58');
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
@@ -18,6 +19,8 @@ app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js'));
 
 app.use('/js', express.static(__dirname + '/views/js'));
 app.use(session({
+  resave: false,
+  saveUninitialized: true,
   secret: 'a secret',
   cookie: { secure: false }
 
@@ -35,13 +38,20 @@ const eth_address = '0x42AE0B92E4985AD0Cde45e9c1Aa72e7f5A130B9E';
 
 const names = require('./testSimpleFn'); // require() returns the object assigned to module.exports
 
-console.log(names.firstnameLastname()); // will print "Jane Doe"
-console.log(names.lastnameFirstname()); // will print "Doe, Jane"
+//console.log(names.firstnameLastname()); // will print "Jane Doe"
+//console.log(names.lastnameFirstname()); // will print "Doe, Jane"
 //19aug2024 the problem is that something is blocking the refresh of the index webpage. everytime i refresh the main index page
 //is that Return Message code is being called. it looks like that it's not the locals in formbs5.ejs. i removed both but the index
 //page still outputs data on refresh.
 // use res.render to load up an ejs view file
 //21aug2024 solved it. it was the currencyNamesMatchMsg variable.  watched youtube video about to-do list that showed an example.
+// var message = "Hello World";
+// var codedString = Base58.encode(new Buffer.from(message));
+// console.log (codedString);
+// var decodedString = Base58.decode(codedString);
+// var buff = new Buffer.from(decodedString);
+// console.log(buff.toString('utf8'));
+
 let cryptoAddress2 = "";
 let currencyNamesMatchMsg = "";
 app.post("/", (req, res) => {
@@ -69,7 +79,7 @@ app.get('/', function(req, res) {
         currencyNamesMatch: sessionData.currencyNamesMatchMsg2
         });
     console.log("Return Messsage: " + currencyNamesMatchMsg)
-    console.log("Session Data: " + sessionData)
+    
     req.session.destroy();
 });
 
