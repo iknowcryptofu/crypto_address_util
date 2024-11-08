@@ -1,4 +1,4 @@
-const WAValidator = require('trezor-address-validator');
+const WAValidator = require('trezor-address-validator2');
 const { showMatchedCurr } = require('../matchedCurr');
 
 var valid = WAValidator.validate('1KFzzGtDdnq5hrwxXGjwVnKzRbvf8WVxck', 'BTC');
