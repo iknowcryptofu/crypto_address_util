@@ -3,8 +3,9 @@ var isNode = typeof module !== 'undefined' && typeof module.exports !== 'undefin
 var chai = isNode ? require('chai') : window.chai,
     expect = chai.expect
 
-var WAValidator = isNode ? require('../src/wallet_address_validator') : window.WAValidator;
-
+  //var WAValidator = isNode ? require('../src/wallet_address_validator') : window.WAValidator;
+var WAValidator = isNode ? require('trezor-address-validator2/src/wallet_address_validator') : window.WAValidator;
+console.log("chai: "+ chai + "\n WAValidator: " + WAValidator);
 const addressType =  WAValidator.addressType;
 
 function isValidAddressType(address, currency, networkType, addressType) {
