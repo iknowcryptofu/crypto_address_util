@@ -5,7 +5,8 @@ var chai = isNode ? require('chai') : window.chai,
 
   //var WAValidator = isNode ? require('../src/wallet_address_validator') : window.WAValidator;
 var WAValidator = isNode ? require('trezor-address-validator2/src/wallet_address_validator') : window.WAValidator;
-console.log("chai: "+ chai + "\n WAValidator: " + WAValidator);
+console.log("chai: "+ chai + "\nWAValidator: " + WAValidator);
+var matchedAddress = require('../matchedCurr');
 const addressType =  WAValidator.addressType;
 
 function isValidAddressType(address, currency, networkType, addressType) {
@@ -16,6 +17,12 @@ function isValidAddressType(address, currency, networkType, addressType) {
 function valid(address, currency, networkType) {
     var valid = WAValidator.validate(address, currency, networkType);
     expect({ address, currency, valid }).to.deep.equal({ address, currency, valid: true });
+}
+
+function valid2(address,currency) {
+    var currMatched = matchedAddress.showMatchedCurr(address);
+    console.log(currMatched.includes(currency));
+
 }
 
 function invalid(address, currency, networkType) {
@@ -29,7 +36,7 @@ describe('WAValidator.validate()', function () {
             valid('12KYrjTdVGjFMtaxERSk3gphreJ5US8aUP', 'bitcoin');
             valid('12QeMLzSrB8XH8FvEzPMVoRxVAzTr5XM2y', 'bitcoin');
             valid('12QeMLzSrB8XH8FvEzPMVoRxVAzTr5XM2y', 'BTC');
-            valid('12QeMLzSrB8XH8FvEzPMVoRxVAzTr5XM2y', 'Bitcoin');
+            valid2('12QeMLzSrB8XH8FvEzPMVoRxVAzTr5XM2y', 'Bitcoin');
             valid('12QeMLzSrB8XH8FvEzPMVoRxVAzTr5XM2y', 'btc');
             valid('12QeMLzSrB8XH8FvEzPMVoRxVAzTr5XM2y', 'btc', 'prod');
             valid('12QeMLzSrB8XH8FvEzPMVoRxVAzTr5XM2y', 'btc', 'both');
