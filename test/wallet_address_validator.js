@@ -7,6 +7,7 @@ var chai = isNode ? require('chai') : window.chai,
 var WAValidator = isNode ? require('trezor-address-validator2/src/wallet_address_validator') : window.WAValidator;
 console.log("chai: "+ chai + "\nWAValidator: " + WAValidator);
 var matchedAddress = require('../matchedCurr');
+var currencies = require('trezor-address-validator2/src/currencies')
 const addressType =  WAValidator.addressType;
 
 function isValidAddressType(address, currency, networkType, addressType) {
@@ -21,7 +22,11 @@ function valid(address, currency, networkType) {
 
 function valid2(address,currency) {
     var currMatched = matchedAddress.showMatchedCurr(address);
-    console.log(currMatched.includes(currency));
+    console.log(currencies.getByNameOrSymbol(currency));
+    let token = currencies.getByNameOrSymbol(currency);
+    let tokenCompare = token.name || token.symbol;
+    console.log(currMatched.includes(tokenCompare));
+    //console.log(currMatched.includes(currencies));
 
 }
 
