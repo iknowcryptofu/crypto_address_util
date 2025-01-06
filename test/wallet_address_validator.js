@@ -10,6 +10,15 @@ var matchedAddress = require('../matchedCurr');
 var currencies = require('trezor-address-validator2/src/currencies')
 const addressType =  WAValidator.addressType;
 
+const nameOrSym = function(currency) {
+    let token = currencies.getByNameOrSymbol(currency);
+    if(token.name === currency) {
+        return token.name;
+    } else if(token.symbol === currency) {
+        return token.symbol;
+    }
+}
+
 function isValidAddressType(address, currency, networkType, addressType) {
     const type = WAValidator.getAddressType(address, currency, networkType);
     expect({ address, addressType: type }).to.deep.equal({address, addressType});
@@ -17,20 +26,19 @@ function isValidAddressType(address, currency, networkType, addressType) {
 
 function valid(address, currency, networkType) {
     var valid = WAValidator.validate(address, currency, networkType);
-    var currMatched = matchedAddress.showMatchedCurr(address);
-    let token = currencies.getByNameOrSymbol(currency);
-    let tokenCompare = token.name || token.symbol;
+    //var currMatched = matchedAddress.showMatchedCurr(address);
+    //let token = currencies.getByNameOrSymbol(currency);
+    //let tokenCompare = token.name || token.symbol;
     // console.log(currMatched.includes(tokenCompare));
     expect({ address, currency, valid }).to.deep.equal({ address, currency, valid: true });
 }
 
-function valid2(address,currency) {
-    var currMatched = matchedAddress.showMatchedCurr(address);
-    console.log(currencies.getByNameOrSymbol(currency));
-    let token = currencies.getByNameOrSymbol(currency);
-    let tokenCompare = token.name || token.symbol;
-    console.log(currMatched.includes(tokenCompare));
-    //console.log(currMatched.includes(currencies));
+function valid2(address,currency, networkType) {
+    var result = nameOrSym(currency);
+    var valid = WAValidator.validate(address, result, networkType);
+    
+    console.log(nameOrSym(currency));
+    expect({ address, currency, valid }).to.deep.equal({ address, currency, valid: true });
 
 }
 
