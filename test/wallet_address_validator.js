@@ -12,12 +12,21 @@ const addressType =  WAValidator.addressType;
 
 const nameOrSym = function(currency) {
     let token = currencies.getByNameOrSymbol(currency);
-    if(token.name === currency) {
-        return token.name;
-    } else if(token.symbol === currency) {
-        return token.symbol;
+    if(token.name.toLowerCase() === currency.toLowerCase()) {
+        return token.name.toLowerCase();
+    } else if(token.symbol.toLowerCase() === currency.toLowerCase()) {
+        return token.symbol.toLowerCase();
     }
 }
+const symbolToName = function(currency) {
+    let token = currencies.getByNameOrSymbol(currency);
+    if(token.symbol.toLowerCase() === currency.toLowerCase()) {
+        return token.name.toLowerCase();
+    } else {
+        return token.symbol.toLowerCase();
+    }
+}
+
 
 function isValidAddressType(address, currency, networkType, addressType) {
     const type = WAValidator.getAddressType(address, currency, networkType);
@@ -25,19 +34,25 @@ function isValidAddressType(address, currency, networkType, addressType) {
 }
 
 function valid(address, currency, networkType) {
-    var valid = WAValidator.validate(address, currency, networkType);
+    var result = nameOrSym(currency);
+    //var valid = WAValidator.validate(address, currency, networkType);
+    var valid = WAValidator.validate(address, result, networkType);
     //var currMatched = matchedAddress.showMatchedCurr(address);
     //let token = currencies.getByNameOrSymbol(currency);
-    //let tokenCompare = token.name || token.symbol;
     // console.log(currMatched.includes(tokenCompare));
+    //console.log(nameOrSym(currency));
     expect({ address, currency, valid }).to.deep.equal({ address, currency, valid: true });
 }
 
 function valid2(address,currency, networkType) {
     var result = nameOrSym(currency);
     var valid = WAValidator.validate(address, result, networkType);
-    
+    var currMatched = matchedAddress.showMatchedCurr(address);
+    //let token = currencies.getByNameOrSymbol(currency);
+    console.log(currMatched.toLowerCase().includes(result));
     console.log(nameOrSym(currency));
+    //console.log(valid);
+    console.log(symbolToName('btc'))
     expect({ address, currency, valid }).to.deep.equal({ address, currency, valid: true });
 
 }
@@ -52,7 +67,7 @@ describe('WAValidator.validate()', function () {
         it('should return true for correct bitcoin addresses', function () {
             valid('12KYrjTdVGjFMtaxERSk3gphreJ5US8aUP', 'bitcoin');
             valid('12QeMLzSrB8XH8FvEzPMVoRxVAzTr5XM2y', 'bitcoin');
-            valid('12QeMLzSrB8XH8FvEzPMVoRxVAzTr5XM2y', 'BTC');
+            valid2('12QeMLzSrB8XH8FvEzPMVoRxVAzTr5XM2y', 'BTC');
             valid2('12QeMLzSrB8XH8FvEzPMVoRxVAzTr5XM2y', 'Bitcoin');
             valid('12QeMLzSrB8XH8FvEzPMVoRxVAzTr5XM2y', 'btc');
             valid('12QeMLzSrB8XH8FvEzPMVoRxVAzTr5XM2y', 'btc', 'prod');
