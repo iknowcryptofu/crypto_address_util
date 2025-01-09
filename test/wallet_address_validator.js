@@ -7,6 +7,7 @@ var chai = isNode ? require('chai') : window.chai,
 var WAValidator = isNode ? require('trezor-address-validator2/src/wallet_address_validator') : window.WAValidator;
 console.log("chai: "+ chai + "\nWAValidator: " + WAValidator);
 var matchedAddress = require('../matchedCurr');
+const {showMatchedCurr, showMatchedCurr2} = require('../matchedCurr');
 var currencies = require('trezor-address-validator2/src/currencies')
 const addressType =  WAValidator.addressType;
 
@@ -23,7 +24,7 @@ const symbolToName = function(currency) {
     if(token.symbol.toLowerCase() === currency.toLowerCase()) {
         return token.name.toLowerCase();
     } else {
-        return token.symbol.toLowerCase();
+        return token.name.toLowerCase();
     }
 }
 
@@ -45,11 +46,19 @@ function valid(address, currency, networkType) {
 }
 
 function valid2(address,currency, networkType) {
-    var result = nameOrSym(currency);
-    var valid = WAValidator.validate(address, result, networkType);
-    var currMatched = matchedAddress.showMatchedCurr(address);
+    //var result = nameOrSym(currency);
+    //var valid = WAValidator.validate(address, result, networkType);
+    var result = symbolToName(currency);
+    //var currency = symbolToName(currency);
+    console.log('currency from test: '+ result);
+    var currMatched = showMatchedCurr2(address);
+    var currMatched = currMatched.map(a => a.toLowerCase());
+    console.log("Currencies Matched toLowerCase: " + currMatched);
     //let token = currencies.getByNameOrSymbol(currency);
-    console.log(currMatched.toLowerCase().includes(result));
+    console.log("Currencies Matched the Address: " + currMatched);
+    console.log("Address matches Bitcoin: " + currMatched.includes(result));
+    console.log("Address matches bitcoin: " + currMatched.includes('bitcoin'));
+    var valid = currMatched.includes(result);
     console.log(nameOrSym(currency));
     //console.log(valid);
     console.log(symbolToName('btc'))

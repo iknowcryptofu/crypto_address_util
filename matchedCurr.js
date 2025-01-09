@@ -31,4 +31,26 @@ function showMatchedCurr(address) {
 
 }
 
-module.exports = { showMatchedCurr }
+function showMatchedCurr2(address) {
+    
+    var allCurrencies = WAValidator.getCurrencies();
+    var currAddrMatchMsg = "";
+    var noAddrFoundMsg = "";
+  
+    function checkCurrencies(currency) {
+        var valid =  WAValidator.validate(address, currency.symbol);
+        if (valid)
+            return currency;
+    };
+
+    var currenciesMatch = allCurrencies.filter(checkCurrencies);
+    var currencyNamesMatch = currenciesMatch.map(token => token.name);
+    
+    console.log(currencyNamesMatch);
+        
+    
+    return currencyNamesMatch;
+
+}
+
+module.exports = { showMatchedCurr, showMatchedCurr2 }
