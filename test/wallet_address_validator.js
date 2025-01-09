@@ -11,14 +11,6 @@ const {showMatchedCurr, showMatchedCurr2} = require('../matchedCurr');
 var currencies = require('trezor-address-validator2/src/currencies')
 const addressType =  WAValidator.addressType;
 
-const nameOrSym = function(currency) {
-    let token = currencies.getByNameOrSymbol(currency);
-    if(token.name.toLowerCase() === currency.toLowerCase()) {
-        return token.name.toLowerCase();
-    } else if(token.symbol.toLowerCase() === currency.toLowerCase()) {
-        return token.symbol.toLowerCase();
-    }
-}
 const symbolToName = function(currency) {
     let token = currencies.getByNameOrSymbol(currency);
     if(token.symbol.toLowerCase() === currency.toLowerCase()) {
@@ -28,39 +20,31 @@ const symbolToName = function(currency) {
     }
 }
 
-
 function isValidAddressType(address, currency, networkType, addressType) {
     const type = WAValidator.getAddressType(address, currency, networkType);
     expect({ address, addressType: type }).to.deep.equal({address, addressType});
 }
 
 function valid(address, currency, networkType) {
-    var result = nameOrSym(currency);
+    var currency = symbolToName(currency);
+    var currMatched = showMatchedCurr2(address);
+    var currMatched = currMatched.map(a => a.toLowerCase());
+    var valid = currMatched.includes(currency);
     //var valid = WAValidator.validate(address, currency, networkType);
-    var valid = WAValidator.validate(address, result, networkType);
-    //var currMatched = matchedAddress.showMatchedCurr(address);
-    //let token = currencies.getByNameOrSymbol(currency);
-    // console.log(currMatched.includes(tokenCompare));
-    //console.log(nameOrSym(currency));
+
     expect({ address, currency, valid }).to.deep.equal({ address, currency, valid: true });
 }
 
 function valid2(address,currency, networkType) {
-    //var result = nameOrSym(currency);
-    //var valid = WAValidator.validate(address, result, networkType);
-    var result = symbolToName(currency);
-    //var currency = symbolToName(currency);
-    console.log('currency from test: '+ result);
+    var currency = symbolToName(currency);
+    console.log('currency from test: '+ currency);
     var currMatched = showMatchedCurr2(address);
     var currMatched = currMatched.map(a => a.toLowerCase());
     console.log("Currencies Matched toLowerCase: " + currMatched);
-    //let token = currencies.getByNameOrSymbol(currency);
     console.log("Currencies Matched the Address: " + currMatched);
-    console.log("Address matches Bitcoin: " + currMatched.includes(result));
+    console.log("Address matches Bitcoin: " + currMatched.includes(currency));
     console.log("Address matches bitcoin: " + currMatched.includes('bitcoin'));
-    var valid = currMatched.includes(result);
-    console.log(nameOrSym(currency));
-    //console.log(valid);
+    var valid = currMatched.includes(currency);
     console.log(symbolToName('btc'))
     expect({ address, currency, valid }).to.deep.equal({ address, currency, valid: true });
 
