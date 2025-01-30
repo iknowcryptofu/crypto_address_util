@@ -6,7 +6,7 @@
       .floating-button {
         position: absolute;
         right: 30px;
-        bottom: 3px;
+        bottom: 2px;
         z-index: 10;
       }
     </style>
@@ -15,26 +15,20 @@
    
     <div class="container-fluid">
       <!-- Top Row -->
-      <div class="row align-items-start border-top mt-3 px-3 pt-2">
-        <!-- Left Column -->
-        <div class="col text-start">
-          <p>Cardano</p>  
-        </div>
-        <!-- Right Column -->
-        <div class="col text-end">
-          <button type="button" class="btn mt-0 me-0" title="Copy to clipboard">
-            <svg class="bi" aria-hidden="true"><use xlink:href="../js/copy.svg#copy"/></svg>
-          </button>
-          
-        </div>
+      <div class="row align-items-center border-top mt-3 px-3 pt-2">
+          <p>Cardano</p>        
       </div>
       <!-- Bottom Row -->
-      <div class="row mt-0 mb-3 border-bottom ps-3 overflow-x-auto">
+      <div class="row mt-0 mb-3 border-bottom ps-3 overflow-x-auto position-relative">
         <div class="col">
           <p>addr1wysmmrpwphe0h6fpxlmcmw46frmzxz89yvpsf8cdv29kcnqsw3vw6</p>
+          <button type="button" class="btn mt-0 me-0 floating-button" title="Copy to clipboard">
+            <svg class="bi" aria-hidden="true"><use xlink:href="../js/copy.svg#copy"/></svg>
+          </button>
         </div>
       </div>
     </div>
+
     <div class="container-fluid">
          <!-- Top Row -->
          <div class="row align-items-center border-top px-3 pt-2">
