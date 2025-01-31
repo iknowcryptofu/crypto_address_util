@@ -6,7 +6,6 @@
 
     <div class="overflow-y-auto align-items-start"> 
    
-   
 
     <div class="container-fluid">
          <!-- Top Row -->
@@ -32,7 +31,6 @@
         </div>
       </div>
 
-    
       <script>
         function copyAddress() {
           // Get the paragraph element
@@ -46,7 +44,71 @@
           });
         }
       </script>
-      
+    <div id="yourTargetDiv" ></div>
+<script> 
+function dynamicRow() {
+// Create container-fluid div
+const container = document.createElement("div");
+container.classList.add("container-fluid");
+
+// Create top row
+topRow = document.createElement("div");
+topRow.classList.add("row", "align-items-center", "border-top", "px-3", "pt-2");
+
+// Create left column
+const leftCol = document.createElement("div");
+leftCol.classList.add("col", "text-start");
+const leftText = document.createElement("p");
+leftText.textContent = "Cardano";
+leftCol.appendChild(leftText);
+
+// Create right column
+const rightCol = document.createElement("div");
+rightCol.classList.add("col", "text-end");
+const button = document.createElement("button");
+button.setAttribute("type", "button");
+button.classList.add("btn", "mt-0", "me-0");
+button.setAttribute("title", "Copy to clipboard");
+button.setAttribute("onclick", "copyAddress()")
+
+// Create SVG element
+const svg = document.createElement("svg");
+svg.classList.add("bi");
+svg.setAttribute("aria-hidden", "true");
+const use = document.createElement("use");
+use.setAttribute("xlink:href", "../js/copy.svg#copy");
+svg.appendChild(use);
+
+// Append SVG to button, button to right column
+button.appendChild(svg);
+rightCol.appendChild(button);
+
+// Append left and right columns to top row
+topRow.appendChild(leftCol);
+topRow.appendChild(rightCol);
+
+// Create bottom row
+const bottomRow = document.createElement("div");
+bottomRow.classList.add("row", "mt-0", "mb-3", "border-bottom", "ps-3", "overflow-x-auto");
+const bottomCol = document.createElement("div");
+bottomCol.classList.add("col");
+const bottomText = document.createElement("p");
+bottomText.setAttribute("id", "myInput");
+bottomText.textContent = "addr1wysmmrpwphe0h6fpxlmcmw46frmzxz89yvpsf8cdv29kcnqsw3vw6";
+
+// Append text to column, column to bottom row
+bottomCol.appendChild(bottomText);
+bottomRow.appendChild(bottomCol);
+
+// Append rows to container
+container.appendChild(topRow);
+container.appendChild(bottomRow);
+
+// Append container to body or a specific element
+document.getElementById("yourTargetDiv").appendChild(container);
+    }
+dynamicRow();
+  </script>
 
     </div>
 
