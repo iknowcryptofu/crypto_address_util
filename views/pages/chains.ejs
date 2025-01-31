@@ -1,7 +1,8 @@
     <%- include('../partials/headbs5'); %>
 
     <%- include('../partials/headerbs5'); %>
-
+    
+   
 
     <div class="overflow-y-auto align-items-start"> 
    
@@ -16,7 +17,7 @@
           </div>
           <!-- Right Column -->
           <div class="col text-end">
-            <button type="button" class="btn mt-0 me-0" title="Copy to clipboard">
+            <button type="button" class="btn mt-0 me-0" title="Copy to clipboard" onclick="copyAddress()">
               <svg class="bi" aria-hidden="true"><use xlink:href="../js/copy.svg#copy"/></svg>
             </button>
             
@@ -25,11 +26,29 @@
         <!-- Bottom Row -->
         <div class="row mt-0 mb-3 border-bottom ps-3 overflow-x-auto">
           <div class="col">
-            <p>addr1wysmmrpwphe0h6fpxlmcmw46frmzxz89yvpsf8cdv29kcnqsw3vw6</p>
+            <p id="myInput">addr1wysmmrpwphe0h6fpxlmcmw46frmzxz89yvpsf8cdv29kcnqsw3vw6</p>
             
           </div>
         </div>
       </div>
 
+    
+      <script>
+        function copyAddress() {
+          // Get the paragraph element
+          let address = document.getElementById("myInput");
+          
+          // Copy the text inside the paragraph to the clipboard
+          navigator.clipboard.writeText(address.textContent).then(() => {
+            alert("Address copied to clipboard: " + address.textContent);
+          }).catch(err => {
+            console.error("Failed to copy text: ", err);
+          });
+        }
+      </script>
+      
+
     </div>
+
+
     <%- include('../partials/footer'); %>
