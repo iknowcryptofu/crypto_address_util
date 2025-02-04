@@ -15,9 +15,12 @@
             <p>Cardano</p>  
           </div>
           <!-- Right Column -->
+         <!--"https://cdn.jsdelivr.net/npm/bootstrap-icons/bootstrap-icons.svg#clipboard"-->
           <div class="col text-end">
             <button type="button" class="btn mt-0 me-0" title="Copy to clipboard" onclick="copyAddress()">
               <svg class="bi" aria-hidden="true"><use xlink:href="../js/copy.svg#copy"/></svg>
+              <svg class="bi" aria-hidden="true"><use xlink:href="/js/copy.svg#copy"/></svg>
+              
             </button>
             
           </div>
@@ -39,13 +42,16 @@
           // Copy the text inside the paragraph to the clipboard
           navigator.clipboard.writeText(address.textContent).then(() => {
             alert("Address copied to clipboard: " + address.textContent);
+            
           }).catch(err => {
             console.error("Failed to copy text: ", err);
           });
         }
       </script>
+       
     <div id="yourTargetDiv" ></div>
 <script> 
+ dynamicRow()
 function dynamicRow() {
 // Create container-fluid div
 const container = document.createElement("div");
@@ -64,23 +70,28 @@ leftCol.appendChild(leftText);
 
 // Create right column
 const rightCol = document.createElement("div");
-rightCol.classList.add("col", "text-end");
+rightCol.classList.add("col", "text-end","border");
 const button = document.createElement("button");
 button.setAttribute("type", "button");
 button.classList.add("btn", "mt-0", "me-0");
 button.setAttribute("title", "Copy to clipboard");
-button.setAttribute("onclick", "copyAddress()")
+button.setAttribute("onclick", "copyAddress()");
+//button.textContent = "test";
 
 // Create SVG element
 const svg = document.createElement("svg");
+
 svg.classList.add("bi");
-svg.setAttribute("aria-hidden", "true");
+//svg.setAttribute("aria-hidden", "true");
+//svg.setAttribute("width", "40");
+//svg.setAttribute("height", "40");
 const use = document.createElement("use");
-use.setAttribute("xlink:href", "../js/copy.svg#copy");
+use.setAttribute("xlink:href", "/js/copy.svg#copy");
 svg.appendChild(use);
 
 // Append SVG to button, button to right column
 button.appendChild(svg);
+
 rightCol.appendChild(button);
 
 // Append left and right columns to top row
@@ -106,8 +117,12 @@ container.appendChild(bottomRow);
 
 // Append container to body or a specific element
 document.getElementById("yourTargetDiv").appendChild(container);
+
+//alert(use.getAttribute("xlink:href")); 
+ 
     }
-dynamicRow();
+  
+
   </script>
 
     </div>
