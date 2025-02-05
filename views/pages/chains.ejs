@@ -13,6 +13,13 @@
         { name: "Litecoin",
           address: "LVg2kJoFNg45Nbpy53h7Fe1wKyeXVRhMH9" }
       ];
+
+      myArray.forEach((element, index, array) => {
+        console.log(element.name + "\n"+element.address); // 100, 200, 300
+        //console.log(index); // 0, 1, 2
+        //console.log(array); // same myArray object 3 times
+        //dynamicRow(element.address,element.add)
+      });
     </script>
 
     <div class="overflow-y-auto align-items-start"> 
@@ -63,8 +70,8 @@
        
     
 <script> 
- dynamicRow()
-function dynamicRow() {
+
+function dynamicRow(address, name) {
 // Create container-fluid div
 
 
@@ -79,7 +86,7 @@ topRow.classList.add("row", "align-items-center", "border-top", "px-3", "pt-2");
 const leftCol = document.createElement("div");
 leftCol.classList.add("col", "text-start");
 const leftText = document.createElement("p");
-leftText.textContent = "Cardano";
+leftText.textContent = name;
 leftCol.appendChild(leftText);
 
 // Create right column
@@ -124,7 +131,7 @@ const bottomCol = document.createElement("div");
 bottomCol.classList.add("col");
 const bottomText = document.createElement("p");
 bottomText.setAttribute("id", "myInput");
-bottomText.textContent = "addr1wysmmrpwphe0h6fpxlmcmw46frmzxz89yvpsf8cdv29kcnqsw3vw6";
+bottomText.textContent = address;
 
 // Append text to column, column to bottom row
 bottomCol.appendChild(bottomText);
