@@ -49,9 +49,11 @@
       <div id="yourTargetDiv" ></div>
 
       <script>
-        function copyAddress() {
+        
+        function copyAddress(index) {
           // Get the paragraph element
-          let address = document.getElementById("myInput");
+          
+          let address = document.getElementById("myInput"+index);
           
           // Copy the text inside the paragraph to the clipboard
           navigator.clipboard.writeText(address.textContent).then(() => {
@@ -66,9 +68,9 @@
     
 <script> 
 
-function dynamicRow(address, name) {
+function dynamicRow(address, name, index) {
 // Create container-fluid div
-
+const myInput = "myInput"+index;
 
 const container = document.createElement("div");
 container.classList.add("container-fluid");
@@ -91,7 +93,9 @@ const button = document.createElement("button");
 button.setAttribute("type", "button");
 button.classList.add("btn", "mt-0", "me-0");
 button.setAttribute("title", "Copy to clipboard");
-button.setAttribute("onclick", "copyAddress()");
+//button.setAttribute("onclick", "copyAddress()");
+//button.addEventListener("click", copyAddress);
+button.addEventListener("click", function(){ copyAddress(index); });
 //button.innerHTML = '<i class="bi bi-copy"></i>';
 const i = document.createElement("i");
 i.classList.add("bi","bi-copy");
@@ -125,7 +129,7 @@ bottomRow.classList.add("row", "mt-0", "mb-3", "border-bottom", "ps-3", "overflo
 const bottomCol = document.createElement("div");
 bottomCol.classList.add("col");
 const bottomText = document.createElement("p");
-bottomText.setAttribute("id", "myInput");
+bottomText.setAttribute("id", myInput);
 bottomText.textContent = address;
 
 // Append text to column, column to bottom row
@@ -145,7 +149,7 @@ document.getElementById("yourTargetDiv").appendChild(container);
     
 
       myArray.forEach((element, index, array) => { 
-        dynamicRow(element.address,element.name);
+        dynamicRow(element.address,element.name, index);
         console.log(element.name + "\n"+element.address); // 100, 200, 300
         console.log(index); // 0, 1, 2
         //console.log(array); // same myArray object 3 times
