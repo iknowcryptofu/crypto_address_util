@@ -14,12 +14,7 @@
           address: "LVg2kJoFNg45Nbpy53h7Fe1wKyeXVRhMH9" }
       ];
 
-      myArray.forEach((element, index, array) => {
-        console.log(element.name + "\n"+element.address); // 100, 200, 300
-        //console.log(index); // 0, 1, 2
-        //console.log(array); // same myArray object 3 times
-        //dynamicRow(element.address,element.add)
-      });
+      
     </script>
 
     <div class="overflow-y-auto align-items-start"> 
@@ -147,7 +142,15 @@ document.getElementById("yourTargetDiv").appendChild(container);
 //alert(use.getAttribute("xlink:href")); 
  
     }
-  
+    
+
+      myArray.forEach((element, index, array) => { 
+        dynamicRow(element.address,element.name);
+        console.log(element.name + "\n"+element.address); // 100, 200, 300
+        console.log(index); // 0, 1, 2
+        //console.log(array); // same myArray object 3 times
+        
+      });
 
   </script>
 
