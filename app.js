@@ -1,5 +1,6 @@
 // load the things we need
 var WAValidator = require('trezor-address-validator2');
+var curr = require('trezor-address-validator2/src/currencies');
 var matchedAddress = require('./matchedCurr');
 var express = require('express');
 const session = require('express-session');
@@ -83,9 +84,13 @@ app.get('/', function(req, res) {
     req.session.destroy();
 });
 
+
 // chains page
 app.get('/chains', function(req, res) {
-    res.render('pages/chains');
+    res.render('pages/chains', {
+        cryptoName: curr.getAll(),
+        cryptoAddress4: curr.getAll()
+});
 });
 
 // chains2 test page
