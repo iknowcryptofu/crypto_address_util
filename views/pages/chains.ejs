@@ -11,19 +11,21 @@
 
     </script>
     
- <!-- <%= cryptoName %> -->
+ 
     <script>
 
       //var WAValidator = require('trezor-address-validator2');
       //console.log(WAValidator);
-      const myArray = [
-        { name: "Bitcoin",
-          address: "12KYrjTdVGjFMtaxERSk3gphreJ5US8aUP" },
-        { name: "Cardano",
-          address: "addr1wysmmrpwphe0h6fpxlmcmw46frmzxz89yvpsf8cdv29kcnqsw3vw6" },
-        { name: "Litecoin",
-          address: "LVg2kJoFNg45Nbpy53h7Fe1wKyeXVRhMH9" }
-      ];
+      // const myArray = [
+      //   { name: "Bitcoin",
+      //     address: "12KYrjTdVGjFMtaxERSk3gphreJ5US8aUP" },
+      //   { name: "Cardano",
+      //     address: "addr1wysmmrpwphe0h6fpxlmcmw46frmzxz89yvpsf8cdv29kcnqsw3vw6" },
+      //   { name: "Litecoin",
+      //     address: "LVg2kJoFNg45Nbpy53h7Fe1wKyeXVRhMH9" }
+      // ];
+
+      const myArray = <%- JSON.stringify(cryptoName) %>;
 
       
     </script>
@@ -169,12 +171,7 @@ document.getElementById("yourTargetDiv").appendChild(container);
 
   </script>
 
-<!-- <% cryptoName.forEach(element =>{ %>
-  <div class="p-2"><%=element.name %></div>
-<% }); %>  -->
-
-
-    </div>
+  </div>
 
 
     <%- include('../partials/footer'); %>
