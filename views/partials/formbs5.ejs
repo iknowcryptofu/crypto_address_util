@@ -16,7 +16,7 @@
           </button>
         </span>
         
-        <input type="search" class="form-control" name="cryptoAddress" id="clipboardInput" placeholder="Paste Crytpo Address Here" value="<%= locals.cryptoAddress %>" pattern="^[a-zA-Z0-9]+\.{0,3}-?" minlength="3" maxlength="100" required>
+        <input type="search" class="form-control" name="cryptoAddress" id="clipboardInput" placeholder="Paste Crypto Address Here" value="<%= locals.cryptoAddress %>" pattern="^[a-zA-Z0-9]+\.{0,3}-?\_?" minlength="3" maxlength="100" required>
        
         <span class="input-group-text input-group-sm">
           <button class="btn btn-outline-secondary" type="submit">
@@ -29,10 +29,10 @@
     </form>
       
   </div>
-  <div class="container w-100 h-50 border">
+  <div class="container w-100 h-50">
     
     
-    <div class="d-flex flex-column mb-3 h-50 border" id="msgTest">
+    <div class="d-flex flex-column mb-3 h-50" id="msgTest">
       <%- currencyNamesMatch || "Please enter a cryptocurrency address in the input form field above." %>
     </div>
   </div>
@@ -68,12 +68,12 @@
       if (!this.checkValidity()) {
           event.preventDefault(); // Prevent the form from submitting if it's not valid
           event.stopPropagation();
-          //alert(feedbackDiv);
+          //alert(inputField);
           if (!inputField.validity.valid) {
             let errorMessage = '<div class="mx-auto w-100"><ul>';
               
               if (inputField.validity.patternMismatch) {
-            errorMessage += '<li>Please use only the following characters:Letter,number,dot or hyphen.</li>';
+            errorMessage += '<li>Please use only the following characters: Letter, number, dot, underscore or hyphen.</li>';
             }
             if (inputField.validity.tooShort) {
                 errorMessage += '<li>Input is too short.</li>';
