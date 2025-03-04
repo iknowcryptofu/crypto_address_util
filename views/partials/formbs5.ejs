@@ -16,7 +16,7 @@
           </button>
         </span>
         
-        <input type="search" class="form-control" name="cryptoAddress" id="clipboardInput" placeholder="Paste Crypto Address Here" value="<%= locals.cryptoAddress %>" pattern="^[a-zA-Z0-9]+\.{0,3}-?\_?" minlength="3" maxlength="100" required>
+        <input type="search" class="form-control" name="cryptoAddress" id="clipboardInput" placeholder="Paste Crypto Address Here" value="<%= locals.cryptoAddress %>" pattern="^[a-zA-Z0-9]+\.{0,3}\-?_?" minlength="3" maxlength="100" required>
        
         <span class="input-group-text input-group-sm">
           <button class="btn btn-outline-secondary" type="submit">
@@ -32,7 +32,7 @@
   <div class="container w-100 h-50">
     
     
-    <div class="d-flex flex-column mb-3 h-50" id="msgTest">
+    <div class="d-flex flex-column mb-3 h-50" id="msg">
       <%- currencyNamesMatch || "Please enter a cryptocurrency address in the input form field above." %>
     </div>
   </div>
@@ -62,7 +62,7 @@
   // Add an event listener for form submission
   document.getElementById("satsForm").addEventListener("submit", function(event) {
     const feedbackDiv = document.getElementById("msg");
-    const feedbackDivTest = document.getElementById("msgTest");
+    
     const inputField = document.getElementById('clipboardInput');
     // Check if the form is valid
       if (!this.checkValidity()) {
@@ -85,9 +85,9 @@
                 errorMessage += '<li>Input is Missing.</li>';
             }
             errorMessage += '</ul></div>';
-            this.classList.add('is-invalid');
-            //feedbackDiv.innerHTML = errorMessage;
-            feedbackDivTest.innerHTML = errorMessage;
+            inputField.classList.add('is-invalid');
+            feedbackDiv.innerHTML = errorMessage;
+            
           }
       }
       this.classList.add('was-validated')
