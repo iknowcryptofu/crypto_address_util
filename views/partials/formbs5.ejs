@@ -16,7 +16,7 @@
           </button>
         </span>
         
-        <input type="search" class="form-control" name="cryptoAddress" id="clipboardInput" placeholder="Paste Crypto Address Here" value="<%= locals.cryptoAddress %>" pattern="^[a-zA-Z0-9]+\.{0,3}\-?_?" minlength="3" maxlength="100" required>
+        <input type="search" class="form-control" name="cryptoAddress" id="clipboardInput" placeholder="Paste Crypto Address Here" value="<%= locals.cryptoAddress %>" pattern="^[a-zA-Z0-9_.\-]+$" minlength="3" maxlength="100" required>
        
         <span class="input-group-text input-group-sm">
           <button class="btn btn-outline-secondary" type="submit">
