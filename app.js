@@ -105,7 +105,19 @@ app.get('/help', function(req, res) {
 });
 
 app.use('/api/:address', function(req, res){
-    res.send(req.params.address);
+    let addr2 = "";
+    const addr3 = req.params.address; 
+    const addr = /^[a-zA-Z0-9_.\-]+$/.test(addr3);
+    if (addr) { 
+      addr2 = matchedAddress.showMatchedCurr2(addr3) 
+       //res.send(JSON.stringify(addr2));
+       res.send(addr2 + addr3);
+    } else {
+      res.send("Invalid Address");
+    }
+
+   
+    
 })
 
 
