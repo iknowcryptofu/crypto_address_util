@@ -107,17 +107,23 @@ app.get('/help', function(req, res) {
 app.use('/api/:address', function(req, res){
     let addr2 = "";
     const addr3 = req.params.address; 
-    const addr = /^[a-zA-Z0-9_.\-]+$/.test(addr3);
+    const addr4 = req.originalUrl;
+    var url = addr4.replace(/\/?/,'')
+    const addr5 = url.substring(url.lastIndexOf('/') + 1)
+    const addr = /^[a-zA-Z0-9_.\-]+$/.test(addr5);
     if (addr) { 
-      addr2 = matchedAddress.showMatchedCurr2(addr3) 
+      addr2 = matchedAddress.showMatchedCurr2(addr5) 
+      if(addr2.length > 0) {
+        res.send(addr2 + addr5);
+      } else {
+        res.send("Invalid Address");
+      }
        //res.send(JSON.stringify(addr2));
-       res.send(addr2 + addr3);
+       
     } else {
       res.send("Invalid Address");
     }
-
    
-    
 })
 
 
