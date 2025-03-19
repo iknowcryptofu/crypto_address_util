@@ -105,27 +105,30 @@ app.get('/help', function(req, res) {
 });
 
 app.use('/api/:address', function(req, res){
-    let addr2 = "";
-    const addr3 = req.params.address; 
-    const addr4 = req.originalUrl;
-    var url = addr4.replace(/\/?/,'')
-    const addr5 = url.substring(url.lastIndexOf('/') + 1)
-    const addr = /^[a-zA-Z0-9_.\-]+$/.test(addr5);
-    if (addr) { 
-      addr2 = matchedAddress.showMatchedCurr2(addr5) 
-      if(addr2.length > 0) {
-        res.send(addr2 + addr5);
-      } else {
-        res.send("Invalid Address");
-      }
-       //res.send(JSON.stringify(addr2));
-       
-    } else {
-      res.send("Invalid Address");
-    }
-   
-})
+    const origURL = req.originalUrl;
 
+    // Remove '/api/' prefix correctly
+    const cleanedUrl = origURL.replace(/^\/api\//, '');
+
+    // Reject addresses with a trailing slash
+    if (cleanedUrl.includes('/')) {
+        return res.status(400).json({ error: "Invalid Address: Cryptocurrency addresses do not contain trailing slashes." });
+    }
+
+    // Validate if it contains only allowed characters
+    const testAddr = /^[a-zA-Z0-9_.\-]+$/.test(cleanedUrl);
+    if (!testAddr) {
+        return res.status(400).json({ error: "Invalid Address: Please use only letters, numbers, dots, underscores, or hyphens." });
+    }
+
+    // Check if the address is recognized
+    const result = matchedAddress.showMatchedCurr2(cleanedUrl);
+    if (result && result.length > 0) {
+        return res.json({ result: result });
+    } else {
+        return res.status(400).json({ error: "The data you entered either doesn't match a crypto address that is on this website, or is not a valid address." });
+    }
+});
 
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
