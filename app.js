@@ -106,28 +106,21 @@ app.get('/help', function(req, res) {
 
 app.use('/api/:address', function(req, res){
     const origURL = req.originalUrl;
-
-    // Remove '/api/' prefix correctly
-    const cleanedUrl = origURL.replace(/^\/api\//, '');
-
-    // Reject addresses with a trailing slash
-    if (cleanedUrl.includes('/')) {
-        return res.status(400).json({ error: "Invalid Address: Cryptocurrency addresses do not contain trailing slashes." });
-    }
-
+    const addr = req.params.address;
     // Validate if it contains only allowed characters
-    const testAddr = /^[a-zA-Z0-9_.\-]+$/.test(cleanedUrl);
-    if (!testAddr) {
+    const checkAddr = /^\/api\/[a-zA-Z0-9_.\-]+$/.test(origURL);
+    if (!checkAddr) {
         return res.status(400).json({ error: "Invalid Address: Please use only letters, numbers, dots, underscores, or hyphens." });
     }
-
+    else {
     // Check if the address is recognized
-    const result = matchedAddress.showMatchedCurr2(cleanedUrl);
+    const result = matchedAddress.showMatchedCurr2(addr);
     if (result && result.length > 0) {
         return res.json({ result: result });
     } else {
         return res.status(400).json({ error: "The data you entered either doesn't match a crypto address that is on this website, or is not a valid address." });
     }
+  }
 });
 
 app.listen(PORT, () => {
