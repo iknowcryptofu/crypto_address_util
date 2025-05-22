@@ -4,6 +4,7 @@ var curr = require('trezor-address-validator2/src/currencies');
 var matchedAddress = require('./matchedCurr');
 var express = require('express');
 const session = require('express-session');
+//var walletcore = require('@trustwallet/wallet-core');
 var app = express();
 const PORT = process.env.PORT || 8080;
 //const Base58 =  require('trezor-address-validator/src/crypto/base58');
@@ -38,6 +39,8 @@ const ada_address = 'addr1wysmmrpwphe0h6fpxlmcmw46frmzxz89yvpsf8cdv29kcnqsw3vw6'
 const eth_address = '0x42AE0B92E4985AD0Cde45e9c1Aa72e7f5A130B9E';
 
 const names = require('./testSimpleFn'); // require() returns the object assigned to module.exports
+
+
 
 //console.log(names.firstnameLastname()); // will print "Jane Doe"
 //console.log(names.lastnameFirstname()); // will print "Doe, Jane"
