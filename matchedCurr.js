@@ -1,16 +1,31 @@
-const WAValidator = require('trezor-address-validator2');
+const { initWasm } = require("@trustwallet/wallet-core");
 
-// Common function to get matched currency names for a given address
-function getMatchedCurrencyNames(address) {
-    const allCurrencies = WAValidator.getCurrencies();
-    return allCurrencies
-        .filter(currency => WAValidator.validate(address, currency.symbol))
-        .map(currency => currency.name);
+async function getMatchedCurrencyNames(address) {
+    const core = await initWasm();
+    const { CoinType, AnyAddress } = core;
+
+    const coinNames = Object.keys(CoinType).filter(k => k !== "values");
+    const matchedCurrencies = [];
+
+    for (const coinName of coinNames) {
+        const coinValue = CoinType[coinName];
+        try {
+            const isValid = AnyAddress.isValid(address, coinValue);
+            if (isValid) {
+                console.log(`✅ Valid for: ${coinName}`);
+                matchedCurrencies.push(coinName);
+            }
+        } catch (e) {
+            console.warn(`Error checking ${coinName}:`, e.message);
+        }
+    }
+
+    return matchedCurrencies;
 }
 
 // Function to return a formatted message based on matched currencies
-function showMatchedCurr(address) {
-    const currencyNamesMatch = getMatchedCurrencyNames(address);
+async function showMatchedCurr(address) {
+    const currencyNamesMatch = await getMatchedCurrencyNames(address);
 
     return currencyNamesMatch.length > 0
         ? `The address you gave matches ${currencyNamesMatch.join(', ')}.`
@@ -18,8 +33,8 @@ function showMatchedCurr(address) {
 }
 
 // Function to log and return matched currency names directly
-function showMatchedCurr2(address) {
-    const currencyNamesMatch = getMatchedCurrencyNames(address);
+async function showMatchedCurr2(address) {
+    const currencyNamesMatch = await getMatchedCurrencyNames(address);
     console.log(currencyNamesMatch);
     return currencyNamesMatch;
 }
